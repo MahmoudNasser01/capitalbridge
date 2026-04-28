@@ -1,6 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "pnpm --filter @workspace/capitalbridge build && rm -rf public && cp -r artifacts/capitalbridge/dist/public ./public",
+  "buildCommand": "pnpm --filter @workspace/capitalbridge build",
   "outputDirectory": "public",
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
