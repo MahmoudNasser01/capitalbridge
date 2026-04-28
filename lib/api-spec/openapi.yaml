@@ -1,0 +1,622 @@
+openapi: 3.1.0
+info:
+  # Do not change the title, if the title changes, the import paths will be broken
+  title: Api
+  version: 0.1.0
+  description: CapitalBridge API
+servers:
+  - url: /api
+    description: Base API path
+tags:
+  - name: health
+  - name: platform
+  - name: companies
+  - name: investors
+  - name: deals
+  - name: industries
+paths:
+  /healthz:
+    get:
+      operationId: healthCheck
+      tags: [health]
+      summary: Health check
+      responses:
+        "200":
+          description: Healthy
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/HealthStatus" }
+
+  /platform/summary:
+    get:
+      operationId: getPlatformSummary
+      tags: [platform]
+      summary: Aggregate platform stats for the marketplace
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/PlatformSummary" }
+
+  /platform/activity:
+    get:
+      operationId: getRecentActivity
+      tags: [platform]
+      summary: Recent activity feed across the marketplace
+      parameters:
+        - in: query
+          name: limit
+          schema: { type: integer, minimum: 1, maximum: 50, default: 12 }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/ActivityItem" }
+
+  /industries:
+    get:
+      operationId: listIndustries
+      tags: [industries]
+      summary: List all industry categories with counts
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/Industry" }
+
+  /companies:
+    get:
+      operationId: listCompanies
+      tags: [companies]
+      summary: List businesses raising capital
+      parameters:
+        - in: query
+          name: search
+          schema: { type: string }
+        - in: query
+          name: industry
+          schema: { type: string }
+        - in: query
+          name: stage
+          schema:
+            type: string
+            enum: [seed, series_a, series_b, series_c, growth, pre_ipo]
+        - in: query
+          name: minRevenue
+          schema: { type: number }
+        - in: query
+          name: sort
+          schema:
+            type: string
+            enum: [trending, newest, raise_size, revenue]
+            default: trending
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/Company" }
+    post:
+      operationId: createCompany
+      tags: [companies]
+      summary: Submit a new company listing to raise capital
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/CreateCompanyInput" }
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Company" }
+
+  /companies/featured:
+    get:
+      operationId: listFeaturedCompanies
+      tags: [companies]
+      summary: Companies highlighted for the homepage
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/Company" }
+
+  /companies/stats:
+    get:
+      operationId: getCompanyStats
+      tags: [companies]
+      summary: Aggregated stats across companies (by stage, by industry)
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/CompanyStats" }
+
+  /companies/{id}:
+    get:
+      operationId: getCompany
+      tags: [companies]
+      summary: Get a company profile by id
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/CompanyDetail" }
+
+  /investors:
+    get:
+      operationId: listInvestors
+      tags: [investors]
+      summary: List investors (individuals and private equity funds)
+      parameters:
+        - in: query
+          name: search
+          schema: { type: string }
+        - in: query
+          name: type
+          schema:
+            type: string
+            enum: [individual, family_office, venture_capital, private_equity, hedge_fund, syndicate]
+        - in: query
+          name: focus
+          schema: { type: string }
+        - in: query
+          name: minCheckSize
+          schema: { type: number }
+        - in: query
+          name: sort
+          schema:
+            type: string
+            enum: [trending, newest, aum, deals]
+            default: trending
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/Investor" }
+    post:
+      operationId: createInvestor
+      tags: [investors]
+      summary: Register a new investor profile
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/CreateInvestorInput" }
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Investor" }
+
+  /investors/featured:
+    get:
+      operationId: listFeaturedInvestors
+      tags: [investors]
+      summary: Investors highlighted on the homepage
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/Investor" }
+
+  /investors/stats:
+    get:
+      operationId: getInvestorStats
+      tags: [investors]
+      summary: Aggregated stats across investors (by type, by focus)
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/InvestorStats" }
+
+  /investors/{id}:
+    get:
+      operationId: getInvestor
+      tags: [investors]
+      summary: Get an investor profile by id
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/InvestorDetail" }
+
+  /deals:
+    get:
+      operationId: listDeals
+      tags: [deals]
+      summary: Recent and ongoing deals on the platform
+      parameters:
+        - in: query
+          name: status
+          schema:
+            type: string
+            enum: [open, closing_soon, funded, closed]
+        - in: query
+          name: limit
+          schema: { type: integer, minimum: 1, maximum: 50, default: 20 }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/Deal" }
+
+components:
+  schemas:
+    HealthStatus:
+      type: object
+      required: [status]
+      properties:
+        status: { type: string }
+
+    PlatformSummary:
+      type: object
+      required:
+        - totalCapitalRaised
+        - companiesListed
+        - activeInvestors
+        - dealsClosedYtd
+        - averageDealSize
+        - investorsByType
+        - capitalByIndustry
+      properties:
+        totalCapitalRaised: { type: number, description: "USD raised across the platform" }
+        companiesListed: { type: integer }
+        activeInvestors: { type: integer }
+        dealsClosedYtd: { type: integer }
+        averageDealSize: { type: number }
+        investorsByType:
+          type: array
+          items:
+            type: object
+            required: [type, count]
+            properties:
+              type: { type: string }
+              count: { type: integer }
+        capitalByIndustry:
+          type: array
+          items:
+            type: object
+            required: [industry, capital]
+            properties:
+              industry: { type: string }
+              capital: { type: number }
+
+    ActivityItem:
+      type: object
+      required: [id, kind, title, subtitle, timestamp]
+      properties:
+        id: { type: string }
+        kind:
+          type: string
+          enum: [listing_created, deal_funded, investor_joined, milestone, deal_opened]
+        title: { type: string }
+        subtitle: { type: string }
+        amount: { type: number, nullable: true }
+        timestamp: { type: string, format: date-time }
+        companyId: { type: string, nullable: true }
+        investorId: { type: string, nullable: true }
+
+    Industry:
+      type: object
+      required: [slug, name, companyCount]
+      properties:
+        slug: { type: string }
+        name: { type: string }
+        companyCount: { type: integer }
+        description: { type: string }
+
+    Company:
+      type: object
+      required:
+        - id
+        - name
+        - tagline
+        - industry
+        - stage
+        - headquarters
+        - foundedYear
+        - logoUrl
+        - heroImageUrl
+        - annualRevenue
+        - ebitdaMargin
+        - growthRate
+        - raiseAmount
+        - valuation
+        - minimumInvestment
+        - committedAmount
+        - investorCount
+        - deadline
+        - featured
+      properties:
+        id: { type: string }
+        name: { type: string }
+        tagline: { type: string }
+        industry: { type: string }
+        stage:
+          type: string
+          enum: [seed, series_a, series_b, series_c, growth, pre_ipo]
+        headquarters: { type: string }
+        foundedYear: { type: integer }
+        logoUrl: { type: string }
+        heroImageUrl: { type: string }
+        annualRevenue: { type: number }
+        ebitdaMargin: { type: number, description: "Percent, e.g. 22 means 22%" }
+        growthRate: { type: number, description: "YoY revenue growth percent" }
+        raiseAmount: { type: number }
+        valuation: { type: number }
+        minimumInvestment: { type: number }
+        committedAmount: { type: number }
+        investorCount: { type: integer }
+        deadline: { type: string, format: date }
+        featured: { type: boolean }
+
+    CompanyDetail:
+      allOf:
+        - $ref: "#/components/schemas/Company"
+        - type: object
+          required: [overview, useOfFunds, highlights, financials, team, documents]
+          properties:
+            overview: { type: string }
+            useOfFunds:
+              type: array
+              items:
+                type: object
+                required: [label, percent]
+                properties:
+                  label: { type: string }
+                  percent: { type: number }
+            highlights:
+              type: array
+              items: { type: string }
+            financials:
+              type: array
+              items:
+                type: object
+                required: [year, revenue, ebitda]
+                properties:
+                  year: { type: integer }
+                  revenue: { type: number }
+                  ebitda: { type: number }
+            team:
+              type: array
+              items:
+                type: object
+                required: [name, title, bio, avatarUrl]
+                properties:
+                  name: { type: string }
+                  title: { type: string }
+                  bio: { type: string }
+                  avatarUrl: { type: string }
+            documents:
+              type: array
+              items:
+                type: object
+                required: [name, kind]
+                properties:
+                  name: { type: string }
+                  kind:
+                    type: string
+                    enum: [pitch_deck, financials, term_sheet, due_diligence, legal]
+
+    CreateCompanyInput:
+      type: object
+      required:
+        - name
+        - tagline
+        - industry
+        - stage
+        - headquarters
+        - foundedYear
+        - annualRevenue
+        - raiseAmount
+        - valuation
+        - minimumInvestment
+        - overview
+      properties:
+        name: { type: string, minLength: 2 }
+        tagline: { type: string, minLength: 4 }
+        industry: { type: string }
+        stage:
+          type: string
+          enum: [seed, series_a, series_b, series_c, growth, pre_ipo]
+        headquarters: { type: string }
+        foundedYear: { type: integer }
+        annualRevenue: { type: number }
+        ebitdaMargin: { type: number }
+        growthRate: { type: number }
+        raiseAmount: { type: number }
+        valuation: { type: number }
+        minimumInvestment: { type: number }
+        overview: { type: string, minLength: 20 }
+
+    CompanyStats:
+      type: object
+      required: [byStage, byIndustry, totalRaiseTarget, totalCommitted]
+      properties:
+        totalRaiseTarget: { type: number }
+        totalCommitted: { type: number }
+        byStage:
+          type: array
+          items:
+            type: object
+            required: [stage, count, raiseTarget]
+            properties:
+              stage: { type: string }
+              count: { type: integer }
+              raiseTarget: { type: number }
+        byIndustry:
+          type: array
+          items:
+            type: object
+            required: [industry, count, raiseTarget]
+            properties:
+              industry: { type: string }
+              count: { type: integer }
+              raiseTarget: { type: number }
+
+    Investor:
+      type: object
+      required:
+        - id
+        - name
+        - type
+        - tagline
+        - location
+        - avatarUrl
+        - aum
+        - dealsCompleted
+        - checkSizeMin
+        - checkSizeMax
+        - focusSectors
+        - stagePreferences
+        - verified
+        - featured
+      properties:
+        id: { type: string }
+        name: { type: string }
+        type:
+          type: string
+          enum: [individual, family_office, venture_capital, private_equity, hedge_fund, syndicate]
+        tagline: { type: string }
+        location: { type: string }
+        avatarUrl: { type: string }
+        aum: { type: number, description: "Assets under management in USD" }
+        dealsCompleted: { type: integer }
+        checkSizeMin: { type: number }
+        checkSizeMax: { type: number }
+        focusSectors:
+          type: array
+          items: { type: string }
+        stagePreferences:
+          type: array
+          items: { type: string }
+        verified: { type: boolean }
+        featured: { type: boolean }
+
+    InvestorDetail:
+      allOf:
+        - $ref: "#/components/schemas/Investor"
+        - type: object
+          required: [bio, thesis, notableInvestments, partners]
+          properties:
+            bio: { type: string }
+            thesis: { type: string }
+            notableInvestments:
+              type: array
+              items:
+                type: object
+                required: [companyName, year, outcome]
+                properties:
+                  companyName: { type: string }
+                  year: { type: integer }
+                  outcome: { type: string }
+            partners:
+              type: array
+              items:
+                type: object
+                required: [name, title, avatarUrl]
+                properties:
+                  name: { type: string }
+                  title: { type: string }
+                  avatarUrl: { type: string }
+
+    CreateInvestorInput:
+      type: object
+      required: [name, type, location, checkSizeMin, checkSizeMax, focusSectors, bio]
+      properties:
+        name: { type: string, minLength: 2 }
+        type:
+          type: string
+          enum: [individual, family_office, venture_capital, private_equity, hedge_fund, syndicate]
+        tagline: { type: string }
+        location: { type: string }
+        aum: { type: number }
+        checkSizeMin: { type: number }
+        checkSizeMax: { type: number }
+        focusSectors:
+          type: array
+          items: { type: string }
+        stagePreferences:
+          type: array
+          items: { type: string }
+        bio: { type: string, minLength: 20 }
+
+    InvestorStats:
+      type: object
+      required: [byType, byFocus, totalAum, totalInvestors]
+      properties:
+        totalAum: { type: number }
+        totalInvestors: { type: integer }
+        byType:
+          type: array
+          items:
+            type: object
+            required: [type, count, aum]
+            properties:
+              type: { type: string }
+              count: { type: integer }
+              aum: { type: number }
+        byFocus:
+          type: array
+          items:
+            type: object
+            required: [focus, count]
+            properties:
+              focus: { type: string }
+              count: { type: integer }
+
+    Deal:
+      type: object
+      required: [id, companyId, companyName, industry, raiseAmount, committedAmount, status, openedAt]
+      properties:
+        id: { type: string }
+        companyId: { type: string }
+        companyName: { type: string }
+        industry: { type: string }
+        raiseAmount: { type: number }
+        committedAmount: { type: number }
+        status:
+          type: string
+          enum: [open, closing_soon, funded, closed]
+        openedAt: { type: string, format: date-time }
+        closesAt: { type: string, format: date-time, nullable: true }
