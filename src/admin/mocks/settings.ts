@@ -33,8 +33,9 @@ export const branding = {
   primaryColor: "#1f6feb",
   secondaryColor: "#0aa372",
   logoUrl: "",
-  emailFooter: "© 2026 CapitalBridge. Sent from the Lync operations console.",
-  supportEmail: "support@capitalbridge.example",
+  emailFooter: "© 2026 CapitalBridge. Sent from the Lync operations console at getlync.net.",
+  supportEmail: "support@getlync.net",
+  marketingUrl: "https://www.getlync.net",
 };
 
 export const billing = {

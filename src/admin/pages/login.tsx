@@ -89,7 +89,7 @@ export function AdminLogin() {
                   <Input
                     id="email"
                     type="email"
-                    placeholder="you@lync.io"
+                    placeholder="you@getlync.net"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     className="pl-9"

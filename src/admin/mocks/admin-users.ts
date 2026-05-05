@@ -4,7 +4,7 @@ export const adminUsers: AdminUser[] = [
   {
     id: "u-elena",
     name: "Elena Park",
-    email: "elena.park@lync.io",
+    email: "elena.park@getlync.net",
     role: "owner",
     avatarUrl: "https://i.pravatar.cc/150?img=47",
     lastActiveAt: "2026-05-05T14:12:00Z",
@@ -13,7 +13,7 @@ export const adminUsers: AdminUser[] = [
   {
     id: "u-marcus",
     name: "Marcus Reyes",
-    email: "marcus.reyes@lync.io",
+    email: "marcus.reyes@getlync.net",
     role: "admin",
     avatarUrl: "https://i.pravatar.cc/150?img=12",
     lastActiveAt: "2026-05-05T13:48:00Z",
@@ -22,7 +22,7 @@ export const adminUsers: AdminUser[] = [
   {
     id: "u-priya",
     name: "Priya Shah",
-    email: "priya.shah@lync.io",
+    email: "priya.shah@getlync.net",
     role: "reviewer",
     avatarUrl: "https://i.pravatar.cc/150?img=32",
     lastActiveAt: "2026-05-05T11:30:00Z",
@@ -31,7 +31,7 @@ export const adminUsers: AdminUser[] = [
   {
     id: "u-sam",
     name: "Sam Okafor",
-    email: "sam.okafor@lync.io",
+    email: "sam.okafor@getlync.net",
     role: "reviewer",
     avatarUrl: "https://i.pravatar.cc/150?img=68",
     lastActiveAt: "2026-05-04T22:01:00Z",
@@ -40,7 +40,7 @@ export const adminUsers: AdminUser[] = [
   {
     id: "u-julia",
     name: "Julia Chen",
-    email: "julia.chen@lync.io",
+    email: "julia.chen@getlync.net",
     role: "support",
     avatarUrl: "https://i.pravatar.cc/150?img=45",
     lastActiveAt: "2026-05-05T14:02:00Z",
@@ -49,7 +49,7 @@ export const adminUsers: AdminUser[] = [
   {
     id: "u-ravi",
     name: "Ravi Patel",
-    email: "ravi.patel@lync.io",
+    email: "ravi.patel@getlync.net",
     role: "viewer",
     avatarUrl: "https://i.pravatar.cc/150?img=22",
     lastActiveAt: "2026-05-03T09:18:00Z",

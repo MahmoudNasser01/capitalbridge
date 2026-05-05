@@ -122,7 +122,7 @@ function TeamTab() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 <div className="space-y-1.5">
                   <Label>Email</Label>
-                  <Input value={inviteEmail} onChange={(e) => setInviteEmail(e.target.value)} placeholder="name@lync.io" />
+                  <Input value={inviteEmail} onChange={(e) => setInviteEmail(e.target.value)} placeholder="name@getlync.net" />
                 </div>
                 <div className="space-y-1.5">
                   <Label>Role</Label>

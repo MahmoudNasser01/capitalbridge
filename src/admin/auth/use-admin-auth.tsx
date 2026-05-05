@@ -5,7 +5,7 @@ import { adminUsers, currentAdmin } from "@/admin/mocks/admin-users";
 const STORAGE_KEY = "lync.admin.session";
 
 export const DEMO_CREDENTIALS = {
-  email: "admin@lync.io",
+  email: "admin@getlync.net",
   password: "admin123",
 };
 
