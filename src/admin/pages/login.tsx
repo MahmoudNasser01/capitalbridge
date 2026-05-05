@@ -42,7 +42,7 @@ export function AdminLogin() {
           <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-primary-foreground font-bold text-lg">L</span>
           <div>
             <p className="font-serif font-bold text-2xl">Lync</p>
-            <p className="text-sm text-muted-foreground">CapitalBridge operations console</p>
+            <p className="text-sm text-muted-foreground">Operations console · getlync.net</p>
           </div>
         </div>
         <div className="space-y-6 max-w-md">
@@ -66,7 +66,7 @@ export function AdminLogin() {
             ))}
           </div>
         </div>
-        <p className="text-xs text-muted-foreground">© 2026 CapitalBridge · Lync v0.1 demo</p>
+        <p className="text-xs text-muted-foreground">© 2026 Lync · v0.1 demo</p>
       </div>
 
       <div className="flex flex-col justify-center px-6 md:px-12 py-12">

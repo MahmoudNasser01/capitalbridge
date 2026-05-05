@@ -29,11 +29,11 @@ export const notificationPrefs = {
 
 export const branding = {
   productName: "Lync",
-  tagline: "Internal operations console for CapitalBridge",
+  tagline: "Operations console for the Lync platform",
   primaryColor: "#1f6feb",
   secondaryColor: "#0aa372",
   logoUrl: "",
-  emailFooter: "© 2026 CapitalBridge. Sent from the Lync operations console at getlync.net.",
+  emailFooter: "© 2026 Lync. Sent from the Lync operations console at getlync.net.",
   supportEmail: "support@getlync.net",
   marketingUrl: "https://www.getlync.net",
 };

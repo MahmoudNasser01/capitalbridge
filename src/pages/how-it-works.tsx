@@ -7,7 +7,7 @@ export function HowItWorks() {
   return (
     <div className="container max-w-screen-2xl px-4 md:px-8 py-16">
       <div className="text-center max-w-3xl mx-auto mb-20">
-        <h1 className="text-4xl md:text-5xl font-serif font-bold tracking-tight mb-6">How CapitalBridge Works</h1>
+        <h1 className="text-4xl md:text-5xl font-serif font-bold tracking-tight mb-6">How Lync Works</h1>
         <p className="text-xl text-muted-foreground">
           We've built a streamlined, transparent process that aligns the interests of established companies and serious investors.
         </p>
@@ -135,7 +135,7 @@ export function HowItWorks() {
           <AccordionItem value="item-3">
             <AccordionTrigger className="text-lg font-semibold">How long does a raise typically take?</AccordionTrigger>
             <AccordionContent className="text-muted-foreground leading-relaxed text-base">
-              While highly dependent on the company and market conditions, well-prepared companies typically close rounds within 45 to 90 days of going live on CapitalBridge.
+              While highly dependent on the company and market conditions, well-prepared companies typically close rounds within 45 to 90 days of going live on Lync.
             </AccordionContent>
           </AccordionItem>
           <AccordionItem value="item-4">

@@ -161,7 +161,7 @@ export function Invest() {
           <div className="bg-card border rounded-2xl p-6 md:p-10 shadow-xl sticky top-24">
             <div className="mb-8">
               <h2 className="text-2xl font-serif font-bold">Create Investor Profile</h2>
-              <p className="text-muted-foreground text-sm mt-2">Establish your presence on CapitalBridge.</p>
+              <p className="text-muted-foreground text-sm mt-2">Establish your presence on Lync.</p>
             </div>
 
             <Form {...form}>

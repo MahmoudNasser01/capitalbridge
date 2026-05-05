@@ -77,7 +77,7 @@ export function About() {
 
       <section className="py-24 text-center">
         <h2 className="text-3xl font-serif font-bold mb-6">Have questions?</h2>
-        <p className="text-muted-foreground mb-8 max-w-md mx-auto">Our coverage team is ready to discuss how CapitalBridge fits your mandate or capital strategy.</p>
+        <p className="text-muted-foreground mb-8 max-w-md mx-auto">Our coverage team is ready to discuss how Lync fits your mandate or capital strategy.</p>
         <Button size="lg" variant="outline" className="px-8">Contact Coverage Team</Button>
       </section>
     </div>

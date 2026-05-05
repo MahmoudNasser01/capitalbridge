@@ -19,7 +19,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <div className="container flex h-16 max-w-screen-2xl items-center justify-between px-4 md:px-8">
           <div className="flex items-center gap-6 md:gap-10">
             <Link href="/" className="flex items-center space-x-2">
-              <span className="font-bold font-serif text-xl tracking-tight">CapitalBridge</span>
+              <span className="inline-flex h-8 w-8 items-center justify-center rounded-md bg-primary text-primary-foreground font-bold text-sm">L</span>
+              <span className="font-bold font-serif text-xl tracking-tight">Lync</span>
             </Link>
             <nav className="hidden md:flex items-center space-x-6 text-sm font-medium">
               <Link
@@ -79,7 +80,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <footer className="border-t bg-muted/20 py-12 md:py-16 px-4 md:px-8">
         <div className="container max-w-screen-2xl grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12">
           <div className="col-span-1 md:col-span-1">
-            <span className="font-bold font-serif text-xl tracking-tight mb-4 block">CapitalBridge</span>
+            <div className="flex items-center gap-2 mb-4">
+              <span className="inline-flex h-8 w-8 items-center justify-center rounded-md bg-primary text-primary-foreground font-bold text-sm">L</span>
+              <span className="font-bold font-serif text-xl tracking-tight">Lync</span>
+            </div>
             <p className="text-muted-foreground text-sm leading-relaxed mb-6">
               Where profitable businesses meet serious capital. The private market standard for sophisticated investors and established companies.
             </p>
@@ -117,7 +121,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
           </div>
         </div>
         <div className="container max-w-screen-2xl mt-12 pt-8 border-t text-center text-xs text-muted-foreground flex flex-col md:flex-row items-center justify-between">
-          <p>&copy; {new Date().getFullYear()} CapitalBridge Marketplace. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Lync · getlync.net. All rights reserved.</p>
           <div className="flex gap-4 mt-4 md:mt-0">
             <span className="cursor-pointer hover:text-foreground transition-colors">Privacy Policy</span>
             <span className="cursor-pointer hover:text-foreground transition-colors">Terms of Service</span>
